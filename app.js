@@ -1,36 +1,17 @@
 const fs = require('fs');
 const Web3 = require('web3');
-const config = require('./config/config');
+const config = require('./config/params');
+const utils = require('./src/utils');
 
 const web3 = new Web3(new Web3.providers.HttpProvider(config.HTTP_PROVIDER));
 const contract = new web3.eth.Contract(config.ABI_ARRAY, config.CONTRACT_ADDRESS);
 
 (async () => {
+    await utils.clearFile(config.FILE_NAME);
     await contract.methods.totalSupply().call().then(async (total) => {
         const holders = [];
         for (let i = 0; i < total; i += 1) {
-            await contract.methods.ownerOf(i).call().then((holder) => {
-                if (holders.indexOf(holder) === -1) {
-                    holders.push(holder);
-                    console.log(holders.length > 1 ? '%d holders found...' : '%d holder found...', holders.length);
-                }
-            });
-        }
-        return holders;
-    }).then(async (holders) => {
-        await fs.unlink(config.FILE_NAME, (err) => {
-            if (err) {
-                return console.log(err);
-            }
-            return true;
-        });
-        for (let i = 0; i < holders.length; i += 1) {
-            await fs.appendFile(config.FILE_NAME, `${holders[i].toString()}\n`, (err) => {
-                if (err) {
-                    return console.log(err);
-                }
-                return true;
-            });
+            utils.addHolder(holders, contract, i);
         }
     });
 })();
