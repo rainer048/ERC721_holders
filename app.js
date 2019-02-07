@@ -12,7 +12,7 @@ const contract = new web3.eth.Contract(config.ABI_ARRAY, config.CONTRACT_ADDRESS
             await contract.methods.ownerOf(i).call().then((holder) => {
                 if (holders.indexOf(holder) === -1) {
                     holders.push(holder);
-                    console.log(holders.length > 1 ? `%d holders found...` : `%d holder found...`, holders.length);
+                    console.log(holders.length > 1 ? '%d holders found...' : '%d holder found...', holders.length);
                 }
             });
         }
@@ -24,8 +24,8 @@ const contract = new web3.eth.Contract(config.ABI_ARRAY, config.CONTRACT_ADDRESS
             }
             return true;
         });
-        for (let holder of holders) {
-            await fs.appendFile(config.FILE_NAME, holder.toString() + '\n', (err) => {
+        for (let i = 0; i < holders.length; i += 1) {
+            await fs.appendFile(config.FILE_NAME, `${holders[i].toString()}\n`, (err) => {
                 if (err) {
                     return console.log(err);
                 }
