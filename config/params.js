@@ -1,8 +1,8 @@
-config = {
-    'HTTP_PROVIDER': 'https://kovan.infura.io/v3/5afcf23b71be40a8a0468f068f54d6c6',
-    'CONTRACT_ADDRESS': '0x8d4acff72446dd053e1e96e336b9bf97ab90ccce',
-    'FILE_NAME': 'holders.txt',
-    'ABI_ARRAY': [{
+const config = {
+    HTTP_PROVIDER: 'https://mainnet.infura.io/v3/4161ec5436de4608be5ddf1101c1d0a5',
+    CONTRACT_ADDRESS: '0x06012c8cf97BEaD5deAe237070F9587f8E7A266d',
+    FILE_NAME: 'holders.txt',
+    ABI_ARRAY: [{
         "constant": true,
         "inputs": [{"name": "interfaceId", "type": "bytes4"}],
         "name": "supportsInterface",
@@ -146,3 +146,6 @@ config = {
 };
 
 module.exports = config;
+
+// HTTP_PROVIDER: 'https://mainnet.infura.io/v3/4161ec5436de4608be5ddf1101c1d0a5',
+//     CONTRACT_ADDRESS: '0x06012c8cf97BEaD5deAe237070F9587f8E7A266d',

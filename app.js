@@ -8,10 +8,14 @@ const contract = new web3.eth.Contract(config.ABI_ARRAY, config.CONTRACT_ADDRESS
 
 (async () => {
     await utils.clearFile(config.FILE_NAME);
-    await contract.methods.totalSupply().call().then(async (total) => {
-        const holders = [];
-        for (let i = 0; i < total; i += 1) {
-            utils.addHolder(holders, contract, i);
-        }
-    });
+    await contract.methods.totalSupply().call()
+        .then(async (total) => {
+            const holders = [];
+            for (let i = 1; i < total; i += 1) {
+                utils.addHolder(holders, contract, i);
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 })();
