@@ -11,7 +11,6 @@ async function addHolder(holders, contract, tokenId) {
                 return true;
             });
             holders.push(holder);
-            console.log(holders.length > 1 ? '%d holders found...' : '%d holder found...', holders.length);
         }
     });
 }
